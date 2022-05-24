@@ -8,10 +8,10 @@ head(mecha_mpg_data)
 #In the lm() function, pass in all six variables (i.e., columns), and 
 #add the dataframe you created in Step 4 as the data parameter.
 
-lm(mpg ~ vehicle_length + vehicle_weight + spoiler_angle + ground_clearance + AWD, data=mecha_mpg_data)
+mechaLM <- lm(mpg ~ vehicle_length + vehicle_weight + spoiler_angle + ground_clearance + AWD, data=mecha_mpg_data)
 
 #Using the summary() function, determine the p-value and the r-squared value for the linear regression model.
-summary(lm(mpg ~ vehicle_length + vehicle_weight + spoiler_angle + ground_clearance + AWD, data=mecha_mpg_data))
+summary(mechaLM)
 
 # import and read in the Suspension_Coil.csv file as a table
 suspension_table <- read.csv(file='Suspension_Coil.csv',check.names=F,stringsAsFactors = F)
@@ -29,9 +29,13 @@ lot_summary2 <- suspension_table %>% group_by(Manufacturing_Lot) %>% summarize(M
 #using the t.test() function to determine if the PSI across all 
 #manufacturing lots is statistically different from the 
 #population mean of 1,500 pounds per square inch.
-t.test(log10(suspension_table$Manufacturing_Lot),mu=mean(log10(suspension_table$PSI))) 
+t.test((suspension_table$PSI),mu=1500) 
 
+t.test(subset(suspension_table,Manufacturing_Lot=="Lot1")$PSI, mu = 1500)
 
+t.test(subset(suspension_table,Manufacturing_Lot=="Lot2")$PSI, mu = 1500)
+
+t.test(subset(suspension_table,Manufacturing_Lot=="Lot3")$PSI, mu = 1500)
 
 
 
